@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>qadca — Links</title>
+
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-solid.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-regular.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/sharp-light.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/duotone.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/brands.css">
+  <meta property="og:title" content="qadca's links" />
+  <meta property="og:description" content="Check my links in this page" />
+  <meta property="og:image" content="https://github.com/qadca/mylinks/blob/main/preview.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://github.com/qadca/mylinks/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="qadca's links" />
+  <meta name="twitter:description" content="Check my links in this page" />
+  <meta name="twitter:image" content="https://github.com/qadca/mylinks/blob/main/preview.png" />
+  <style>
+    :root{
+      --bg:#553535;
+      --muted:#cfc8bf;
+      --accent:#b43c2c;
+      --accent-2:#6b5946;
+      --card-radius:14px;
+      --glass: rgba(255, 255, 255, 0.336);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background-color: #755555;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:40px 16px;
+    }
+    .container{
+      width:100%;
+      max-width:480px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+    .avatar{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      overflow:hidden;
+      margin-top:20px;
+      box-shadow: 0 2px 20px rgb(153, 16, 16);
+      border:2px solid rgb(255, 255, 255);
+    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
+    .name{
+      margin-top:12px;
+      font-size:22px;
+      font-weight:700;
+      color:#fd624dbd;
+    }
+    .subtitle{
+      font-weight: bold;
+      margin-top:6px;
+      color:#ffffff;
+      font-size:15px;
+    }
+
+    /* соц. иконки */
+    .socials{
+      display:flex;
+      gap:18px;
+      margin-top:14px;
+    }
+    .socials a{
+      color:#ff9292;
+      font-size:30px;
+      line-height:1;
+      transition:transform .15s ease, color .15s ease;
+      text-decoration:none;
+    }
+    .socials a:hover{
+      transform:translateY(-4px);
+      color:#cfc8bf;
+    }
+
+    /* карточки */
+    .links{
+      width:100%;
+      margin-top:26px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding:0 6px 40px 6px;
+    }
+    .link{
+      display:flex;
+      flex-direction:column;
+      gap: s;
+      padding:12px;
+      background:var(--accent);
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.03);
+      color:var(--muted);
+      text-decoration:none;
+      box-shadow:0 10px 24px rgba(0,0,0,0.6);
+      transition:transform .12s ease, box-shadow .12s ease;
+      cursor:pointer;
+      user-select:none;
+      overflow:visible;
+    }
+    .link.row {
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .link:hover{transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.7)}
+    .link-left{display:flex;align-items:center;gap:14px; flex:1;}
+    .link-icon{
+      width:44px;height:44px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;
+      font-size:30px;
+      color:#fff;
+    }
+    .link-content{
+      flex:1;
+      text-align:center;
+    }
+    .link-text{
+      font-size:16px;color:#fff;font-weight:600;
+      line-height:1;
+    }
+    .link-sub{
+      font-size:13px;color:var(--muted); margin-top:4px; font-weight:500;
+    }
+    .kebab{
+      width:34px;height:34px;border-radius:10px;
+      background:rgba(255,255,255,0.02);
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,0.03);
+      flex-shrink:0;
+      transition:transform .28s cubic-bezier(.2,.9,.2,1);
+    }
+    svg{display:block}
+
+    /* плавное раскрытие карточки */
+    .devices-dropdown{
+      overflow:hidden;
+      max-height:0;
+      padding:0 4px;
+      border-radius:12px;
+      transition:
+        max-height .42s cubic-bezier(.2,.9,.2,1),
+        padding .32s cubic-bezier(.2,.9,.2,1),
+        opacity .28s ease;
+      opacity:0;
+    }
+    .link.open .devices-dropdown{
+      max-height:460px; /* достаточно, чтобы вместить все элементы */
+      padding:10px 4px 8px 4px;
+      opacity:1;
+    }
+
+    /* элементы списка: изящное появление с небольшим смещением + stagger */
+    .devices-list{
+      list-style:none;
+      margin:0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .devices-list li{
+      padding:10px 12px;
+      border-radius:10px;
+      background:rgba(0,0,0,0.12);
+      color:#fff;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      transform: translateY(-8px);
+      opacity:0;
+      transition: transform .36s cubic-bezier(.22,.9,.25,1), opacity .36s ease;
+    }
+    /* stagger через nth-child */
+    .link.open .devices-list li:nth-child(1){ transition-delay: 0.02s; transform: translateY(0); opacity:1; }
+    .link.open .devices-list li:nth-child(2){ transition-delay: 0.06s; transform: translateY(0); opacity:1; }
+    .link.open .devices-list li:nth-child(3){ transition-delay: 0.10s; transform: translateY(0); opacity:1; }
+    .link.open .devices-list li:nth-child(4){ transition-delay: 0.14s; transform: translateY(0); opacity:1; }
+    /* при закрытии задержки убираются автоматически (они перестают быть заданы) */
+
+    .devices-list li:hover{background:rgba(0,0,0,0.18); transform:translateY(-3px)}
+    .device-badge{
+      font-size:12px;
+      color:var(--muted);
+      background:rgba(255,255,255,0.03);
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.02);
+      font-weight:500;
+    }
+
+    /* ссылки выглядят как текст, но остаются доступными */
+    .devices-list a{
+      color: inherit;
+      text-decoration: none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      gap:10px;
+      outline: none;
+    }
+    .devices-list a:focus{
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+      border-radius:8px;
+    }
+
+    /* keyboard focus for li if no anchor */
+    .devices-list li:focus{
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+      border-radius:8px;
+    }
+
+    .footer-space{height:120px}
+    @media (max-width:420px){
+      .container{padding-bottom:40px}
+      .avatar{width:82px;height:82px}
+      .name{font-size:20px}
+      .link{padding:12px}
+      .link-icon{width:40px;height:40px;font-size:22px}
+    }
+
+    #maincontainer{
+      margin-top: 60px;
+    }
+
+    /* chevron rotation when open */
+    .link.open .kebab i{
+      transform: rotate(180deg);
+    }
+    .kebab i{
+      transition: transform .28s cubic-bezier(.2,.9,.2,1);
+      display:inline-block;
+    }
+.devices-list li {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.devices-list a {
+  outline: none !important;
+  box-shadow: none !important;
+}
+  </style>
+</head>
+<body>
+  <div class="container" role="main" id="maincontainer">
+    <div class="avatar">
+      <img src="https://4pda.to/s/HEBh2r5BsyUJlHxDT9ruEFEPSYZXpYdh1ZlU5dbZuZz0I0RkE5p.jpg" alt="qadcA avatar" />
+    </div>
+
+    <div class="name">qadca</div>
+    <div class="subtitle">Check my links below</div>
+
+    <div class="socials" aria-label="social links">
+      <a href="https://t.me/qadca" title="Telegram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://github.com/qadca" title="GitHub" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i></a>
+      <a href="mailto:timofey.butrimov@gmail.com" title="Email" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i></a>
+    </div>
+
+    <div class="links" id="links">
+      <a class="link row" href="https://t.me/qadca" target="_blank" rel="noopener noreferrer">
+        <div class="link-left">
+          <div class="link-icon" aria-hidden="true"><i class="fa-brands fa-telegram"></i></div>
+          <div class="link-content"><div class="link-text">If you want to text me, use telegram</div></div>
+        </div>
+      </a>
+
+      <div class="links" id="links">
+      <a class="link row" href="https://4pda.to/forum/index.php?showuser=11911430" target="_blank" rel="noopener noreferrer">
+        <div class="link-left">
+          <div class="link-icon" aria-hidden="true"><i class="fa-brands fa-android"></i></div>
+          <div class="link-content"><div class="link-text">Help each other on the forum</div></div>
+        </div>
+      </a>
+
+      <a class="link row" href="https://github.com/qadca" target="_blank" rel="noopener noreferrer">
+        <div class="link-left">
+          <div class="link-icon" aria-hidden="true"><i class="fa-brands fa-github"></i></div>
+          <div class="link-content"><div class="link-text">Check out my GitHub Projects</div></div>
+        </div>
+      </a>
+
+      <!-- My Devices: карточка-аккордеон -->
+      <div class="link" id="devicesCard" role="button" aria-haspopup="true" aria-expanded="false" tabindex="0">
+        <div class="row" style="display:flex;align-items:center;justify-content:space-between;width:100%;">
+          <div class="link-left">
+            <div class="link-icon" aria-hidden="true"><i class="fa-solid fa-laptop"></i></div>
+            <div class="link-content"><div class="link-text">My Devices</div></div>
+          </div>
+
+          <div class="kebab" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+        </div>
+
+        <!-- dropdown как часть карточки -->
+        <div class="devices-dropdown" id="devicesDropdown" aria-hidden="true">
+          <ul class="devices-list" role="menu" aria-label="My devices">
+            <li role="menuitem" tabindex="0">
+              <a href="https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://www.mi.com/fr/redmi-9/%3Fsrsltid%3DAfmBOoo58yf4CH0L60vW94ZTYUi0wMloCiBAghzdKlfr7G3GEYnOnkRO&ved=2ahUKEwjMm5KtjcGPAxUVV6QEHVMiK6cQFnoECCAQAQ&usg=AOvVaw1PpuNd1BBBDtQljND6kzAj" target="_blank" rel="noopener noreferrer">
+                <span>Redmi 9</span>
+                <span class="device-badge">galahad</span>
+              </a>
+            </li>
+
+            <li role="menuitem" tabindex="0">
+              <a href="https://support.hp.com/ca-fr/document/c05068427" target="_blank" rel="noopener noreferrer">
+                <span>HP Pavilion 17</span>
+                <span class="device-badge"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    <div class="footer-space"></div>
+  </div>
+
+  <script>
+    (function(){
+      const card = document.getElementById('devicesCard');
+      const dropdown = document.getElementById('devicesDropdown');
+
+      function openClose(toggle) {
+        const opening = toggle === undefined ? !card.classList.contains('open') : !!toggle;
+        card.classList.toggle('open', opening);
+        card.setAttribute('aria-expanded', opening ? 'true' : 'false');
+        dropdown.setAttribute('aria-hidden', opening ? 'false' : 'true');
+      }
+
+      // click on card toggles dropdown (but ignore clicks on list items/links)
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.devices-list')) return;
+        openClose();
+      });
+
+      // keyboard support: Enter/Space to toggle, Esc to close
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openClose();
+        } else if (e.key === 'Escape') {
+          openClose(false);
+          card.focus();
+        }
+      });
+
+      // close if click outside
+      document.addEventListener('click', (e) => {
+        if (!card.contains(e.target)) {
+          openClose(false);
+        }
+      });
+
+      // handle keyboard activation for list items without anchors (keeps accessibility)
+      const items = card.querySelectorAll('.devices-list li');
+      items.forEach((li) => {
+        li.addEventListener('keydown', (ev) => {
+          if (ev.key === 'Enter' || ev.key === ' ') {
+            const a = li.querySelector('a');
+            if (a) {
+              // follow the link on Enter/Space
+              a.click();
+            } else {
+              ev.preventDefault();
+              // fallback behaviour: highlight and close
+              items.forEach(x => x.style.opacity = '1');
+              li.style.opacity = '0.85';
+              openClose(false);
+            }
+          }
+        });
+      });
+
+      // nice behaviour: when opening, focus first anchor
+      const observer = new MutationObserver(() => {
+        if (card.classList.contains('open')) {
+          const firstA = card.querySelector('.devices-list a');
+          if (firstA) firstA.focus();
+        }
+      });
+      observer.observe(card, { attributes: true, attributeFilter: ['class'] });
+    })();
+  </script>
+</body>
+</html>
